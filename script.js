@@ -9,8 +9,10 @@ const display = (nums) => {
     if (typeof nums !== "number") {
         screen.textContent = "error";
         return;
+    } else if (nums.toString().includes(".") && nums.toString().length > 10) {
+        screen.textContent = Number.parseFloat(nums).toFixed(7);
     } else if (nums.toString().length > 14) {
-        screen.textContent = Number.parseFloat(nums).toExponential([8]);
+        screen.textContent = Number.parseInt(nums).toExponential([8]);
     }
     else {
         screen.textContent = nums;
