@@ -17,7 +17,9 @@ body {
     grid-gap: 2px;
     margin: auto;
     height: auto;
-    width: auto;
+    min-width: 15rem;
+    min-height: 15rem;
+    width: 42vh;
     grid-template-areas:
     'screen screen screen screen'
     'clear clear clear .'
@@ -46,13 +48,19 @@ body {
 #screen {
     grid-area: screen;
     text-align: center;
-    padding: 3vh 2vh;
+    height: 10vh;
+    padding: 1.5vh;
+    align-self: stretch;
     justify-self: stretch;
     background-color: rgb(18, 37, 74);
-    font-size: 3vh;
     overflow: hidden;
     color: rgb(255, 255, 255);
-    text-align: end;
+}
+
+#screen h1 {
+    font-size: 3vh;
+    font-weight: normal;
+    float: right;
 }
 
 #clear {
