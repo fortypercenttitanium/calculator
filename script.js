@@ -21,22 +21,28 @@ const display = (nums) => {
 
 Array.from(buttons).forEach(button => 
     button.addEventListener("click", e => {
-    if (e.target.hasAttribute("data-key")) {
-        if (screen.textContent === "0" || screen.textContent === ""){
-            if (e.target.id === "decimal") {
-                screen.textContent = "0.";
+        if (e.target.hasAttribute("data-key")) {
+            if (screen.textContent === "0" || screen.textContent === ""){
+                if (e.target.id === "decimal") {
+                    screen.textContent = "0.";
+                } else if (screen.textContent === "" && e.target.classList.contains("func")) {
+                    screen.textContent = "";
+                }
+                else {
+                screen.textContent = e.target.getAttribute("data-key");
+                }
             } else {
-            screen.textContent = e.target.getAttribute("data-key");
+                if (e.target.classList.contains("func") && screen.textContent.charAt(screen.textContent.length -1).match(/[\+\-\/\*\.]/)) {
+                    screen.textContent = screen.textContent.slice(0, screen.textContent.length - 1);
+                    screen.textContent += (e.target.getAttribute("data-key"));
+                } else if ((e.target.id == "decimal" && (/\.(?!\d*[\*\/\+\-])/g.test(screen.textContent)))) {
+                    screen.textContent = screen.textContent;
+                } else {
+                    screen.textContent += (e.target.getAttribute("data-key"));
+                }
             }
-        } else {
-            if (e.target.classList.contains("func") && screen.textContent.charAt(screen.textContent.length -1).match(/[\+\-\/\*\.]/)) {
-                screen.textContent = screen.textContent.slice(0, screen.textContent.length - 1);
-            } else if (e.target.classList.contains("decimal") && screen.textContent.charAt(screen.textContent.length -1).match(/\./)) {
-                screen.textContent = screen.textContent.slice(0, screen.textContent.length - 1);
-            }
-        screen.textContent += (e.target.getAttribute("data-key"));
-        }
-}}))
+    }})
+);
 
 let clearFunc = () => screen.textContent = "";
 
@@ -74,7 +80,11 @@ let execute = (operation) => {
 
 const afterEquals = (e) => {
         if (e.target.classList.contains("number") || e.target.classList.contains("decimal")) {
-            screen.textContent = e.target.getAttribute("data-key");
+            if (e.target.id == "decimal") {
+                screen.textContent = "0.";
+            } else {
+                screen.textContent = e.target.getAttribute("data-key");
+            }
             buttons.forEach(btn => btn.removeEventListener("click", afterEquals));
         } else buttons.forEach(btn => btn.removeEventListener("click", afterEquals));
     }
