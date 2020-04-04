@@ -69,8 +69,16 @@ body {
     background-color: rgb(78, 95, 129);
 }
 
+.func {
+    background-color: rgb(46, 70, 109);
+}
+
 #decimal {
     grid-area: decimal;
+}
+
+#equals {
+    background-color: rgb(78, 95, 129);
 }
 
 #zero {
