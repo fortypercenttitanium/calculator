@@ -31,6 +31,8 @@ Array.from(buttons).forEach(button =>
         } else {
             if (e.target.classList.contains("func") && screen.textContent.charAt(screen.textContent.length -1).match(/[\+\-\/\*\.]/)) {
                 screen.textContent = screen.textContent.slice(0, screen.textContent.length - 1);
+            } else if (e.target.classList.contains("decimal") && screen.textContent.charAt(screen.textContent.length -1).match(/\./)) {
+                screen.textContent = screen.textContent.slice(0, screen.textContent.length - 1);
             }
         screen.textContent += (e.target.getAttribute("data-key"));
         }
